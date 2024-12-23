@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Number Info App</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: url("number.jpg") no-repeat center center fixed;
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+        /* background-color: powderblue; */
+        background-image: url("assests/download\ \(2\).jpeg")
+      
+        
+      }
+
+      .header {
+        text-align: center;
+        color: lightgreen;
+        padding: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      
+
+      }
+
+      .header h1 {
+        font-size: 50px;
+        font-weight: bold;
+      }
+
+      .header p {
+        font-size: 20px;
+        font-style: italic;
+        margin: 5px 0 0 0;
+      }
+
+      .content-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 0;
+      }
+
+      .container {
+        background-color: lightgoldenrodyellow;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 50px;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+      }
+
+      input,
+      select,
+      button {
+        margin: 10px 0;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      button {
+        background-color: pink;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: lightgreen;
+      }
+
+      #output {
+        margin-top: 20px;
+        font-size: 18px;
+      }
+
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 40px;
+        }
+
+        .header p {
+          font-size: 16px;
+        }
+
+       
+      } 
+
+      @media (max-width: 576px) {
+        .container {
+          padding: 15px;
+        }
+
+        input,
+        select,
+        button {
+          padding: 8px;
+        }
+      }
+      
+      
+    </style>
+  </head>
+  <body>
+    <div class="header" id="home">
+      <h1>NUMBER INFO</h1>
+      <p>Interesting facts about numbers</p>
+    </div>
+    <div class="content-wrapper">
+      <div class="container">
+        <h1>Number Info App</h1>
+        <input type="text" id="numberInput" placeholder="Enter a number" />
+        <select id="typeSelect">
+                <option value="trivia">Trivia</option>
+                <option value="math">Math</option>
+                <option value="date">Date</option>
+                <option value="year">Year</option>
+            </select>
+       
+        <button id="getInfoButton">Get Info</button>
+        <p id="output"></p>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("getInfoButton")
+        .addEventListener("click", function () {
+          const number = document.getElementById("numberInput").value;
+          const type = document.getElementById("typeSelect").value;
+          const output = document.getElementById("output");
+
+          if (!number) {
+            output.textContent = "Please enter a number.";
+            return;
+          }
+
+          fetch(`http://numbersapi.com/${number}/${type}`)
+            .then((response) => response.text())
+            .then((data) => {
+              output.textContent = data;
+            })
+            .catch((error) => {
+              console.error("Error fetching data:", error);
+              output.textContent =
+                "Error fetching data. Please try again later.";
+            });
+        });
+    </script>
+  </body>
+</html>
+
