@@ -165,7 +165,7 @@
             return;
           }
 
-          fetch(`https://numbersapi.com/${number}/${type}`)
+          fetch(`http://numbersapi.com/${number}/${type}`)
             .then((response) => response.text())
             .then((data) => {
               output.textContent = data;
